@@ -1,2 +1,2 @@
-# TDD
+# StringCalculator
 Einstaklings TDD verkefni
