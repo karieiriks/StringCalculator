@@ -1,7 +1,8 @@
+package ir.ru.stringCalculator;
 
 public class StringCalculator{
 
-	public statis void main(String[] args){
+	public static int add(String[] args){
 		return;
 	}
 }
