@@ -8,7 +8,7 @@ public class Calculator {
 			}
 			else if(text.contains(",")){
 				String[] parts = splitString(text);
-				return sum(toInt(parts[0]) , toInt(parts[1]));
+				return sumX(parts);
 			}
 			return 0;
 	}
@@ -24,5 +24,13 @@ public class Calculator {
 	public static int sum(Integer number1, Integer number2){
 		return number1 + number2;
 	}
+
+	public static int sumX(String[] text){
+		int sum = 0;
+		for(int i = 0; i < text.length; i++){
+			sum += toInt(text[i]);
+		}
+		return sum;
+	}	
 
 }
