@@ -6,7 +6,7 @@ public class Calculator {
 			if(text.equals("1")) {
 				return 1;
 			}
-			else if(text.contains(",")){
+			else if(text.contains(",") || text.contains("\n")){
 				String[] parts = splitString(text);
 				return sumX(parts);
 			}
@@ -14,7 +14,7 @@ public class Calculator {
 	}
 
 	public static String[] splitString(String wholeString){
-		return wholeString.split(",");
+		return wholeString.split("(,)|(\n)");
 	}
 
 	public static int toInt(String str){
