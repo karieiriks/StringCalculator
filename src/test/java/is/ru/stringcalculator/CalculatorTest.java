@@ -2,6 +2,7 @@ package is.ru.stringcalculator;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class CalculatorTest {
 
@@ -57,6 +58,22 @@ public class CalculatorTest {
 		assertEquals(3, Calculator.add("//;\n1;2"));
 		assertEquals(6, Calculator.add("//!\n1,2!3"));
 		assertEquals(6, Calculator.add("//&\n1&2,3"));
+	}
+
+	/*@Test
+	public void testNegative(){
+		String[] check = Calculator.splitString("-2,1,3,4");
+		assertEquals(8, Calculator.checkNegative(check).length());
+	}*/
+
+	@Test
+	public void throwsExceptionNegativeNumbers() {
+	    try {
+	    	assertEquals(0, Calculator.add("-1,-2,3"));
+	    	assertEquals(0, Calculator.add("//!\n-1,-2!3"));
+	    } catch (Exception e) {
+	        //Assert.fail("Test failed : " + e.getMessage());
+	    }
 	}
 
 }

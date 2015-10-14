@@ -56,7 +56,9 @@ public class Calculator {
 	public static int sumX(String[] text){
 		int sum = 0;
 		for(int i = 0; i < text.length; i++){
-			sum += toInt(text[i]);
+			if(toInt(text[i]) <= 1000){
+				sum += toInt(text[i]);
+			}
 		}
 		return sum;
 	}	
