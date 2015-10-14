@@ -43,11 +43,20 @@ public class CalculatorTest {
 	@Test
 	public void testNewLineChar(){
 		assertEquals(3, Calculator.add("1\n2"));
+		assertEquals(21, Calculator.add("1,2\n3,4\n5,6"));
+		assertEquals(6, Calculator.add("1,2,3"));
 	}
 
 	@Test 
 	public void testNewLineAndCommaChar(){
 		assertEquals(6, Calculator.add("1,2\n3"));
+	}
+
+	@Test
+	public void testDelimeter(){
+		assertEquals(3, Calculator.add("//;\n1;2"));
+		assertEquals(6, Calculator.add("//!\n1,2!3"));
+		assertEquals(6, Calculator.add("//&\n1&2,3"));
 	}
 
 }
