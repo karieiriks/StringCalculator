@@ -12,10 +12,30 @@ public class Calculator {
 				String newText = newStrings[1];
 				newText = newText.replace(delimeter, ",");
 				String[] finalString = splitString(newText);
+				try{
+					if(checkNegative(finalString).length() > 0){
+						String check = checkNegative(finalString);
+						System.out.println("Negatives not allowed: " + check);
+						throw new Exception();
+					}
+				}catch(Exception e){
+	        	
+					
+				}
 				return sumX(finalString);
 			}
 			else if(text.contains(",") || text.contains("\n")){
 				String[] parts = splitString(text);
+				try{
+					if(checkNegative(parts).length() > 0){
+						String check = checkNegative(parts);
+						System.out.println("Negatives not allowed: " + check);
+						throw new Exception();
+					}
+				}catch(Exception e){
+	        	
+
+				}
 				return sumX(parts);
 			}
 			return 0;
@@ -49,4 +69,42 @@ public class Calculator {
 		return oldText.substring(2, oldText.length());
 	}
 
+	public static String checkNegative(String[] suspiciousText){
+		String guilty = "";
+		for(int i = 0; i < suspiciousText.length; i++){
+			if(toInt(suspiciousText[i]) < 0)
+			{
+				guilty += suspiciousText[i] + ",";
+			}
+		}
+		guilty = guilty.substring(0, (guilty.length() - 1));
+		return guilty;
+	}
 }
+
+
+
+
+
+/*String checkNeg = checkNegative(finalString);
+try{
+try{
+	if(checkNeg.length() != 0)
+		Throw NegativeNumberException();
+}catch(NegativeNumberException e){
+	StdOut.println("Negatives not allowed ");		
+		for(int i = 0; i < checkNeg.length(); i++){
+			StdOut.print(checkNeg[i]);
+		}
+}
+String checkNeg = checkNegative(parts);
+try{
+	if(checkNeg.length() != 0){
+		Throw new NegativeNumberException();
+	}
+}catch(NegativeNumberException){
+	StdOut.println("Negatives not allowed ");		
+		for(int i = 0; i < checkNeg.length(); i++){
+			StdOut.print(checkNeg[i]);
+		}
+}*/
