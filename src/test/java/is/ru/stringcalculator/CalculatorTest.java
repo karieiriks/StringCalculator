@@ -25,4 +25,14 @@ public class CalculatorTest {
 		assertEquals(3, Calculator.add("1,2"));
 	}
 
+	@Test
+	public void testLargeNumbers(){
+		assertEquals(2468, Calculator.add("1234,1234"));
+	}
+
+	@Test
+	public void testThreeNumberString(){
+		assertEquals(6, Calculator.add("1,2,3"));
+	}
+
 }
