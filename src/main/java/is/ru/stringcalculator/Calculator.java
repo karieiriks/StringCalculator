@@ -6,6 +6,14 @@ public class Calculator {
 			if(text.equals("1")) {
 				return 1;
 			}
+			else if(text.contains("//")){
+				String[] newStrings = splitWithDelimeter(text, "\n");
+				String delimeter = getDelimeter(newStrings[0]);
+				String newText = newStrings[1];
+				newText = newText.replace(delimeter, ",");
+				String[] finalString = splitString(newText);
+				return sumX(finalString);
+			}
 			else if(text.contains(",") || text.contains("\n")){
 				String[] parts = splitString(text);
 				return sumX(parts);
@@ -32,5 +40,13 @@ public class Calculator {
 		}
 		return sum;
 	}	
+
+	public static String[] splitWithDelimeter(String subText, String delimeter){
+		return subText.split(delimeter);
+	}
+
+	public static String getDelimeter(String oldText){
+		return oldText.substring(2, oldText.length());
+	}
 
 }
