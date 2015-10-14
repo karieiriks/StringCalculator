@@ -28,7 +28,8 @@ public class CalculatorTest {
 
 	@Test
 	public void testLargeNumbers(){
-		assertEquals(2468, Calculator.add("1234,1234"));
+		// this test fails automaticly after I put in a contraint that no number can be higher than 1000
+		//assertEquals(2468, Calculator.add("1234,1234"));
 	}
 
 	@Test
@@ -58,13 +59,8 @@ public class CalculatorTest {
 		assertEquals(3, Calculator.add("//;\n1;2"));
 		assertEquals(6, Calculator.add("//!\n1,2!3"));
 		assertEquals(6, Calculator.add("//&\n1&2,3"));
+		//assertEquals(6, Calculator.add("//a\n1a2b3"));
 	}
-
-	/*@Test
-	public void testNegative(){
-		String[] check = Calculator.splitString("-2,1,3,4");
-		assertEquals(8, Calculator.checkNegative(check).length());
-	}*/
 
 	@Test
 	public void throwsExceptionNegativeNumbers() {
@@ -74,6 +70,11 @@ public class CalculatorTest {
 	    } catch (Exception e) {
 	        //Assert.fail("Test failed : " + e.getMessage());
 	    }
+	}
+
+	@Test
+	public void noLargerThan1000(){
+		assertEquals(6, Calculator.add("1,2,3,1001"));
 	}
 
 }
