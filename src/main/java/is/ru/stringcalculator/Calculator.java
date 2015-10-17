@@ -15,7 +15,6 @@ public class Calculator {
 				try{
 					if(checkNegative(finalString).length() > 0){
 						String check = checkNegative(finalString);
-						System.out.println("Negatives not allowed: " + check);
 						throw new Exception();
 					}
 				}catch(Exception e){
@@ -29,7 +28,6 @@ public class Calculator {
 				try{
 					if(checkNegative(parts).length() > 0){
 						String check = checkNegative(parts);
-						System.out.println("Negatives not allowed: " + check);
 						throw new Exception();
 					}
 				}catch(Exception e){
@@ -68,6 +66,9 @@ public class Calculator {
 	}
 
 	public static String getDelimeter(String oldText){
+		if(oldText.contains("[")){
+			return oldText.substring(3, (oldText.length() - 1));
+		}
 		return oldText.substring(2, oldText.length());
 	}
 
