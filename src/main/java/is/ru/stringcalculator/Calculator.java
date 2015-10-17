@@ -1,42 +1,56 @@
 package is.ru.stringcalculator;
 
+import java.util.Arrays;
+
 public class Calculator {
 
 	public static int add(String text){
-			if(text.equals("1")) {
-				return 1;
+			if(text.contains("][")){
+				String[] newString = splitWithDelimeter(text, "\n");
+				String[] delimeters = getMultipleDelimeters(newString[0]);
+				String newText = newString[1];
+				for(int i = 0; i < delimeters.length; i++){
+					newText = newText.replace(delimeters[i], ",");
+				}
+				String[] finalString = splitString(newText);
+				exceptionOrNot(finalString);
+				return sumX(finalString);
 			}
 			else if(text.contains("//")){
-				String[] newStrings = splitWithDelimeter(text, "\n");
-				String delimeter = getDelimeter(newStrings[0]);
-				String newText = newStrings[1];
+				String[] newString = splitWithDelimeter(text, "\n");
+				String delimeter = getDelimeter(newString[0]);
+				String newText = newString[1];
 				newText = newText.replace(delimeter, ",");
 				String[] finalString = splitString(newText);
-				try{
-					if(checkNegative(finalString).length() > 0){
-						String check = checkNegative(finalString);
-						throw new Exception();
-					}
-				}catch(Exception e){
-	        	
-					
-				}
+				exceptionOrNot(finalString);
 				return sumX(finalString);
 			}
 			else if(text.contains(",") || text.contains("\n")){
 				String[] parts = splitString(text);
-				try{
-					if(checkNegative(parts).length() > 0){
-						String check = checkNegative(parts);
-						throw new Exception();
-					}
-				}catch(Exception e){
-	        	
-
-				}
+				exceptionOrNot(parts);
 				return sumX(parts);
 			}
-			return 0;
+			else{
+				if(text.length() != 0){
+					return toInt(text);
+				}
+				else{
+					return 0;
+				}
+			}
+	}
+
+	public static void exceptionOrNot(String[] suspiciousText){
+		try{
+			if(checkNegative(suspiciousText).length() > 0){
+				String check = checkNegative(suspiciousText);
+				throw new Exception();
+			}
+		}
+		catch(Exception e){
+    	
+			
+		}
 	}
 
 	public static String[] splitString(String wholeString){
@@ -72,6 +86,14 @@ public class Calculator {
 		return oldText.substring(2, oldText.length());
 	}
 
+	public static String[] getMultipleDelimeters(String oldText){
+			oldText = oldText.substring(3, oldText.length());
+			oldText = oldText.replace("]", ",");
+			oldText = oldText.replace("[", "");
+			return oldText.split(",");
+	}
+
+
 	public static String checkNegative(String[] suspiciousText){
 		String guilty = "";
 		for(int i = 0; i < suspiciousText.length; i++){
@@ -84,30 +106,3 @@ public class Calculator {
 		return guilty;
 	}
 }
-
-
-
-
-
-/*String checkNeg = checkNegative(finalString);
-try{
-try{
-	if(checkNeg.length() != 0)
-		Throw NegativeNumberException();
-}catch(NegativeNumberException e){
-	StdOut.println("Negatives not allowed ");		
-		for(int i = 0; i < checkNeg.length(); i++){
-			StdOut.print(checkNeg[i]);
-		}
-}
-String checkNeg = checkNegative(parts);
-try{
-	if(checkNeg.length() != 0){
-		Throw new NegativeNumberException();
-	}
-}catch(NegativeNumberException){
-	StdOut.println("Negatives not allowed ");		
-		for(int i = 0; i < checkNeg.length(); i++){
-			StdOut.print(checkNeg[i]);
-		}
-}*/
