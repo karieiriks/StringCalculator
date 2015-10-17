@@ -19,6 +19,8 @@ public class CalculatorTest {
 	@Test
 	public void testOneNumberString(){
 		assertEquals(1, Calculator.add("1"));
+		assertEquals(2, Calculator.add("2"));
+		assertEquals(3, Calculator.add("3"));
 	}
 
 	@Test
@@ -59,7 +61,6 @@ public class CalculatorTest {
 		assertEquals(3, Calculator.add("//;\n1;2"));
 		assertEquals(6, Calculator.add("//!\n1,2!3"));
 		assertEquals(6, Calculator.add("//&\n1&2,3"));
-		//assertEquals(6, Calculator.add("//a\n1a2b3"));
 	}
 
 	@Test
@@ -82,4 +83,15 @@ public class CalculatorTest {
 		assertEquals(10, Calculator.add("//[!#%]\n1,2,3,4"));
 	}
 
+
+	@Test
+	public void testMultipleDelimeters(){
+		assertEquals(6, Calculator.add("//[*][!]\n1,2,3"));
+	}
+
 }
+
+
+
+
+
