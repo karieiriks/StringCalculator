@@ -66,15 +66,20 @@ public class CalculatorTest {
 	public void throwsExceptionNegativeNumbers() {
 	    try {
 	    	assertEquals(0, Calculator.add("-1,-2,3"));
-	    	assertEquals(0, Calculator.add("//!\n-1,-2!3"));
 	    } catch (Exception e) {
-	        //Assert.fail("Test failed : " + e.getMessage());
+	        assertEquals("Negatives not allowed: -1,-2", e.getMessage());
 	    }
 	}
 
 	@Test
-	public void noLargerThan1000(){
+	public void testNoLargerThan1000(){
 		assertEquals(6, Calculator.add("1,2,3,1001"));
+	}
+
+	@Test
+	public void testLongerDelimeters(){
+		assertEquals(6, Calculator.add("//[***]\n1,2,3"));
+		assertEquals(10, Calculator.add("//[!#%]\n1,2,3,4"));
 	}
 
 }
