@@ -13,7 +13,7 @@ public class Calculator {
 					newText = newText.replace(delimeters[i], ",");
 				}
 				String[] finalString = splitString(newText);
-				exceptionOrNot(finalString);
+				checkNegative(finalString);
 				return sumX(finalString);
 			}
 			else if(text.contains("//")){
@@ -22,12 +22,12 @@ public class Calculator {
 				String newText = newString[1];
 				newText = newText.replace(delimeter, ",");
 				String[] finalString = splitString(newText);
-				exceptionOrNot(finalString);
+				checkNegative(finalString);
 				return sumX(finalString);
 			}
 			else if(text.contains(",") || text.contains("\n")){
 				String[] parts = splitString(text);
-				exceptionOrNot(parts);
+				checkNegative(parts);
 				return sumX(parts);
 			}
 			else{
@@ -40,18 +40,6 @@ public class Calculator {
 			}
 	}
 
-	public static void exceptionOrNot(String[] suspiciousText){
-		try{
-			if(checkNegative(suspiciousText).length() > 0){
-				String check = checkNegative(suspiciousText);
-				throw new Exception();
-			}
-		}
-		catch(Exception e){
-    	
-			
-		}
-	}
 
 	public static String[] splitString(String wholeString){
 		return wholeString.split("(,)|(\n)");
@@ -94,15 +82,12 @@ public class Calculator {
 	}
 
 
-	public static String checkNegative(String[] suspiciousText){
-		String guilty = "";
+	public static void checkNegative(String[] suspiciousText){
 		for(int i = 0; i < suspiciousText.length; i++){
 			if(toInt(suspiciousText[i]) < 0)
 			{
-				guilty += suspiciousText[i] + ",";
+				throw new IllegalArgumentException("Negatives");
 			}
 		}
-		guilty = guilty.substring(0, (guilty.length() - 1));
-		return guilty;
 	}
 }
