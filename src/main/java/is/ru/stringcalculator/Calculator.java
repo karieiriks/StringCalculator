@@ -41,19 +41,19 @@ public class Calculator {
 	}
 
 
-	public static String[] splitString(String wholeString){
+	private static String[] splitString(String wholeString){
 		return wholeString.split("(,)|(\n)");
 	}
 
-	public static int toInt(String str){
+	private static int toInt(String str){
 		return Integer.parseInt(str);
 	}
 
-	public static int sum(Integer number1, Integer number2){
+	private static int sum(Integer number1, Integer number2){
 		return number1 + number2;
 	}
 
-	public static int sumX(String[] text){
+	private static int sumX(String[] text){
 		int sum = 0;
 		for(int i = 0; i < text.length; i++){
 			if(toInt(text[i]) <= 1000){
@@ -63,18 +63,18 @@ public class Calculator {
 		return sum;
 	}	
 
-	public static String[] splitWithDelimeter(String subText, String delimeter){
+	private static String[] splitWithDelimeter(String subText, String delimeter){
 		return subText.split(delimeter);
 	}
 
-	public static String getDelimeter(String oldText){
+	private static String getDelimeter(String oldText){
 		if(oldText.contains("[")){
 			return oldText.substring(3, (oldText.length() - 1));
 		}
 		return oldText.substring(2, oldText.length());
 	}
 
-	public static String[] getMultipleDelimeters(String oldText){
+	private static String[] getMultipleDelimeters(String oldText){
 			oldText = oldText.substring(3, oldText.length());
 			oldText = oldText.replace("]", ",");
 			oldText = oldText.replace("[", "");
@@ -82,12 +82,20 @@ public class Calculator {
 	}
 
 
-	public static void checkNegative(String[] suspiciousText){
+	private static void checkNegative(String[] suspiciousText){
+		String guilty = "";
 		for(int i = 0; i < suspiciousText.length; i++){
 			if(toInt(suspiciousText[i]) < 0)
 			{
-				throw new IllegalArgumentException("Negatives");
+				guilty += suspiciousText[i] + ",";
 			}
 		}
+		if(guilty.isEmpty()){
+			return;
+		}
+		int size = guilty.length();
+		guilty = guilty.substring(0, (size - 1));
+		throw new IllegalArgumentException("Negatives not allowed: " + guilty);
+
 	}
 }
