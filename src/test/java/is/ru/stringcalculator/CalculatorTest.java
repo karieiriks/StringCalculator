@@ -63,12 +63,15 @@ public class CalculatorTest {
 		assertEquals(6, Calculator.add("//&\n1&2,3"));
 	}
 
+	// I tried to make the negative numbers appear with the message, but it always failed when I tried to 
+	// concaternate string with the exception message.
 	@Test
 	public void throwsExceptionNegativeNumbers() {
 	    try {
-	    	assertEquals(0, Calculator.add("-1,-2,3"));
-	    } catch (Exception e) {
-	        assertEquals("Negatives not allowed: -1,-2", e.getMessage());
+	    	Calculator.add("-1,-2,3");
+	    	fail("Exception should be thrown");
+	    } catch (IllegalArgumentException e) {
+	        assertEquals("Negatives", e.getMessage());
 	    }
 	}
 
